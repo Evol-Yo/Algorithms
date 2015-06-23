@@ -43,6 +43,40 @@ void test9()
     int res = GreedyTaskScheduling1(v, NULL);
 }
 
+#include <set>
+#include "BTree.h"
+#include "g_bTree.h"
+#include "g_btree_container.h"
+
+void test_performance()
+{
+    const int n = 1000000;
+    int *p = new int[n];
+    for (int i = 0; i < n; i++)
+    {
+        p[i] = rand() % n;
+    }
+
+    std::pair<int, int> *pa = new std::pair<int, int>[n];
+    for (int i = 0; i < n; i++)
+    {
+        pa[i].first = p[i];
+        pa[i].second = i;
+    }
+
+    g_btree::btree_unique_container<g_btree::btree<g_btree::btree_set_params<int, std::less<int>, std::allocator<int>, 256> > > g_bt;
+    g_bt.insert(&p[0], &p[n]);
+
+    std::set<int> s;
+    s.insert(&p[0], &p[n]);
+
+    stx::btree<int, int> stx_bt;
+    stx_bt.insert(&pa[0], &pa[n]);
+
+    //cout << g_bt.bytes_used() << endl;
+    //cout << g_bt.average_bytes_per_value() << endl;
+}
+
 int main()
 {
     /*int arr[] = { 13, -3, -25, 20, -3, -16, -23, 18, 20,
