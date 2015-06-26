@@ -66,12 +66,21 @@ void test_fib_heap()
     FibHeapDestory(heap);
 }
 
+void test_count_sort()
+{
+    int arr[8] = { 8, 7, 6, 5, 4, 3, 0, 0 };
+    int res[8];
+    CountSort(arr, 8, res, 8);
+    print(res, 8);
+}
+
 int main()
 {
     //test1();
     //test2();
     //test9();
-    test_fib_heap();
+    //test_fib_heap();
+    test_count_sort();
 
     return 0;
 }

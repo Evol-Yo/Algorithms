@@ -101,6 +101,32 @@ void MergeSort(T *arr, int p, int r)
     delete[]ptr;
 }
 
+// 计数排序
+//
+// @src - 输入数组
+// @m   - 数组个数
+// @dst - 排序结果
+// @k   - 元素范围 0 ~ k
+void CountSort(int src[], int m, int dst[], const long k)
+{
+    int *ptr = new int[k + 1];
+    memset(ptr, 0, sizeof(int) * (k + 1));
+    int i;
+
+    for (i = 0; i < m; i++)
+        ptr[src[i]]++;
+
+    for ( i = 1; i <= k; i++)
+        ptr[i] += ptr[i - 1];
+
+    for (i = m - 1; i >= 0; i--)
+    {
+        dst[ptr[src[i]] - 1] = src[i];
+        ptr[src[i]]--; //重复的数，我们需要减少计数
+    }
+    delete[]ptr;
+}
+
 ///////////////////////////////////////////////////
 //最大子数组
 //////////////////////////////////////////////////
