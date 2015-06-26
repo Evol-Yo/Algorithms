@@ -1,3 +1,5 @@
+#pragma warning(disable:4996) //for std::copy
+
 #ifndef _FIB_HEAP_H
 #define _FIB_HEAP_H
 
@@ -8,7 +10,7 @@
 #include<climits>
 using namespace std;
 
-//斐波那契结点ADT
+
 typedef struct FibonacciHeapNode
 {
     int key;       //结点
@@ -26,7 +28,7 @@ typedef struct FibonacciHeap
     int keyNum;   //堆中结点个数
     FibonacciHeapNode * min;//最小堆，根结点
     int maxNumOfDegree;   //最大度
-    FibonacciHeapNode * * cons;//指向最大度的内存区域
+    FibonacciHeapNode **cons;//指向最大度的内存区域
 }FibHeap;
 
 //将x从双链表移除
@@ -48,7 +50,7 @@ void FibHeapInsert(FibHeap * heap, FibNode * x);
 void FibHeapInsertKeys(FibHeap * heap, int keys[], int keyNum);
 
 //将值插入Fibonacci Heap
-static void FibHeapInsertKey(FibHeap * heap, int key);
+void FibHeapInsertKey(FibHeap * heap, int key);
 
 //抽取最小结点
 FibNode * FibHeapExtractMin(FibHeap * heap);
@@ -59,20 +61,8 @@ void FibHeapConsolidate(FibHeap * heap);
 //将x根结点链接到y根结点
 void FibHeapLink(FibHeap * heap, FibNode * x, FibNode *y);
 
-//开辟FibHeapConsolidate函数哈希所用空间
-static void FibHeapConsMake(FibHeap * heap);
-
-//将堆的最小结点移出，并指向其有兄弟
-static FibNode *FibHeapMinRemove(FibHeap * heap);
-
 //减小一个关键字
 void FibHeapDecrease(FibHeap * heap, FibNode * x, int key);
-
-//切断x与父节点y之间的链接，使x成为一个根
-static void FibHeapCut(FibHeap * heap, FibNode * x, FibNode * y);
-
-//级联剪切
-static void FibHeapCascadingCut(FibHeap * heap, FibNode * y);
 
 //修改度数
 void renewDegree(FibNode * parent, int degree);

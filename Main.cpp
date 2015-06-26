@@ -1,5 +1,6 @@
 #include <iostream>
 #include "algo.h"
+#include "fib_heap.h"
 using namespace std;
 
 template<class T>
@@ -12,8 +13,6 @@ void print(const T *arr, int size)
     }
     cout << endl;
 }
-
-
 
 void test7()
 {
@@ -43,52 +42,36 @@ void test9()
     int res = GreedyTaskScheduling1(v, NULL);
 }
 
-#include <set>
-#include "BTree.h"
-#include "g_bTree.h"
-#include "g_btree_container.h"
-
-void test_performance()
+void test_fib_heap()
 {
-    const int n = 1000000;
-    int *p = new int[n];
-    for (int i = 0; i < n; i++)
+    int keys[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+    FibHeap * heap = NULL;
+    FibNode * x = NULL;
+    heap = FibHeapMake();
+    FibHeapInsertKeys(heap, keys, 10);
+
+    x = FibHeapExtractMin(heap);
+    x = FibHeapSearch(heap, 7);
+    if (NULL != x)
     {
-        p[i] = rand() % n;
+        cout << x->key << endl;
+        FibHeapDecrease(heap, x, 0);
     }
-
-    std::pair<int, int> *pa = new std::pair<int, int>[n];
-    for (int i = 0; i < n; i++)
+    x = FibHeapSearch(heap, 8);
+    if (NULL != x)
     {
-        pa[i].first = p[i];
-        pa[i].second = i;
+        cout << x->key << endl;
+        FibHeapDelete(heap, x);
     }
-
-    g_btree::btree_unique_container<g_btree::btree<g_btree::btree_set_params<int, std::less<int>, std::allocator<int>, 256> > > g_bt;
-    g_bt.insert(&p[0], &p[n]);
-
-    std::set<int> s;
-    s.insert(&p[0], &p[n]);
-
-    stx::btree<int, int> stx_bt;
-    stx_bt.insert(&pa[0], &pa[n]);
-
-    //cout << g_bt.bytes_used() << endl;
-    //cout << g_bt.average_bytes_per_value() << endl;
+    FibHeapDestory(heap);
 }
 
 int main()
 {
-    /*int arr[] = { 13, -3, -25, 20, -3, -16, -23, 18, 20,
-                  -7, 12, -5, -22, 15, -4, 7 };
-    int left = -1;
-    int right = -1;
-    int sum = 0;
-    FindMaxSubArray(arr, 0, 15, left, right, sum);
-    cout << "left : " << left << ", right : " << right << ", sum : " << sum << endl;*/
     //test1();
     //test2();
-    test9();
+    //test9();
+    test_fib_heap();
 
     return 0;
 }
