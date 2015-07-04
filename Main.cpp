@@ -1,6 +1,7 @@
 #include <iostream>
 #include "algo.h"
 #include "fib_heap.h"
+#include "UFSet.h"
 using namespace std;
 
 template<class T>
@@ -66,6 +67,19 @@ void test_fib_heap()
     FibHeapDestory(heap);
 }
 
+void test_UFSET()
+{
+    UFSets u(10);
+    //(1 3 6) (4 5) (2 7 8)
+    u.Union(1, 3);
+    u.Union(1, 6);
+    u.Union(4, 5);
+    u.Union(2, 7);
+    u.Union(7, 8);
+    cout << u.Find(1)<<endl;
+    u.print();
+}
+
 void test_count_sort()
 {
     int arr[8] = { 8, 7, 6, 5, 4, 3, 0, 0 };
@@ -88,10 +102,6 @@ void test_vEB()
     cout << vtree.succ(9) << endl;
     cout << vtree.succ(5555) << endl;
     cout << vtree.exist(9999) << endl;
-
-    //vtree.insert(1);
-    //vtree.insert(100);
-    //vtree.insert(1000);
 }
 
 int main()
@@ -101,7 +111,8 @@ int main()
     //test9();
     //test_fib_heap();
     //test_count_sort();
-    test_vEB();
+    //test_vEB();
+    test_UFSET();
 
     return 0;
 }
