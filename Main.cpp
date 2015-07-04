@@ -74,13 +74,34 @@ void test_count_sort()
     print(res, 8);
 }
 
+#include "vEBTree.h"
+void test_vEB()
+{
+    vEB vtree;
+    vtree.build(10000);
+    vtree.insert(1);
+    vtree.insert(10);
+    vtree.insert(25);
+    vtree.insert(9999);
+    cout << vtree.succ(9) << endl;
+    vtree.del(10);
+    cout << vtree.succ(9) << endl;
+    cout << vtree.succ(5555) << endl;
+    cout << vtree.exist(9999) << endl;
+
+    //vtree.insert(1);
+    //vtree.insert(100);
+    //vtree.insert(1000);
+}
+
 int main()
 {
     //test1();
     //test2();
     //test9();
     //test_fib_heap();
-    test_count_sort();
+    //test_count_sort();
+    test_vEB();
 
     return 0;
 }
