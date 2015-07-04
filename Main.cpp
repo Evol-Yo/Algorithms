@@ -2,6 +2,7 @@
 #include "algo.h"
 #include "fib_heap.h"
 #include "UFSet.h"
+#include "Graph.h"
 using namespace std;
 
 template<class T>
@@ -104,6 +105,36 @@ void test_vEB()
     cout << vtree.exist(9999) << endl;
 }
 
+void test_Graph()
+{
+    Graph<char> gh;
+    gh.insert_vertex('0');
+    gh.insert_vertex('1');
+    gh.insert_vertex('2');
+    gh.insert_vertex('3');
+    gh.insert_vertex('4');
+    gh.insert_vertex('5');
+    gh.insert_vertex('6');
+
+    gh.insert_edge('0', '1', 28);
+    gh.insert_edge('1', '2', 16);
+    gh.insert_edge('2', '3', 12);
+    gh.insert_edge('3', '4', 22);
+    gh.insert_edge('4', '5', 25);
+    gh.insert_edge('5', '0', 10);
+    gh.insert_edge('4', '6', 24);
+    gh.insert_edge('6', '3', 18);
+    gh.insert_edge('1', '6', 14);
+
+    gh.print();
+    MinSpanTree<char> tree(gh.NumberOfVertices() - 1);
+    gh.Kruskal(tree);
+    tree.print();
+    cout << "-------------------------------" << endl;
+    gh.Prim(tree);
+    tree.print();
+}
+
 int main()
 {
     //test1();
@@ -112,7 +143,8 @@ int main()
     //test_fib_heap();
     //test_count_sort();
     //test_vEB();
-    test_UFSET();
+    //test_UFSET();
+    test_Graph();
 
     return 0;
 }
